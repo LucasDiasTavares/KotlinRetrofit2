@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#CD0000</color>
+    <color name="colorPrimaryDark">#CD0000</color>
+    <color name="colorAccent">#000</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorGray">#CCCCCC</color>
+    <color name="colorLight_Gray">#FFF2F2F2</color>
+    <color name="colorLight_Blue">#6E1E75B7</color>
+    <color name="colorLightRed">#FF4848</color>
+    <color name="colorRed">#FF0000</color>
+    <color name="colorDarkRed">#940000</color>
+    <color name="colorRedLight">#f47d83</color>
+    <color name="colorRedLight2">#f0969b</color>
+    <color name="colorStateButton">#e96769</color>
+    <color name="colorGrayLight2">#bfb9b9</color>
+    <color name="colorGrayLight">#a7a7a7</color>
+    <color name="colorHintGray">#414140</color>
+    <color name="colorGrayDark2">#353535</color>
+    <color name="colorGrayDark">#292929</color>
+    <color name="colorBlackLigh">#131313</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorWhiteLight2">#f6f4f4</color>
+    <color name="colorWhiteLight">#e9e5e5</color>
+    <color name="colorWhiteDark">#dad9d9</color>
+    <color name="colorGreen">#01df01</color>
+    <color name="colorGreenDark">#024c3e</color>
+    <color name="colorGreenMarinho">#00945e</color>
+    <color name="colorIcCamEnabled">#0ac20c</color>
+    <color name="colorGreenLight">#9ce99c</color>
+    <color name="colorOrange">#fd6e00</color>
+    <color name="colorOrangeLight">#efb284</color>
+    <color name="color_blue">#0021de</color>
+    <color name="color_bluelight">#4964fc</color>
+    <color name="color_bluelight_state">#bbc3f1</color>
+    <color name="color_parachoque_lado_esquerdo">#ff0000</color>
+    <color name="color_yellow_alert">#ffdd00</color>
+    <color name="color_yellow_alert_light">#f5bb3c</color>
+    <color name="color_yellow_alert_light2">#f7d485</color>
+    <color name="color_green_alert_light">#77cb46</color>
+    <color name="color_green_alert_light2">#b1e792</color>
+
+    <color name="color_item_menu_desable">#a7a7a7</color>
+    <color name="color_item_circle_menu_disable">#bfb9b9</color>
+    <color name="color_item_orange">#c78903</color>
+    <color name="color_item_pink">#ed2971</color>
+    <color name="color_item_magenta">#830332</color>
+    <color name="color_item_verdeagua">#04d677</color>
+    <color name="color_item_purple">#6e1dde</color>
+    <color name="color_item_red">#ff0000</color>
+
+    <color name="color_blue_stepper">#3995f9</color>
+    <color name="color_gray_stepper_disabled">#bfb9b9</color>
+</resources>
+
