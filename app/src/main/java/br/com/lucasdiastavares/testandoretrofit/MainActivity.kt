@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MainActivity : AppCompatActivity() {
 
     private var mainAdapter: MainAdapter?=null
-    private var myList = ArrayList<Hits>()
+    private var myList = ArrayList<Post>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,19 +23,19 @@ class MainActivity : AppCompatActivity() {
         //Retrofit Builder
         val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("https://pixabay.com/api/")
+                .baseUrl("https://api-para-estudos-kotlin.herokuapp.com/api/")
                 .build()
 
         val jsonPlaceholderApi = retrofit.create(JsonPlaceholderApi::class.java)
 
-        jsonPlaceholderApi.getPosts().enqueue(object :Callback<Post>{
+        jsonPlaceholderApi.getPosts().enqueue(object: Callback<List<Post>>{
 
-            override fun onResponse(call: Call<Post>, response: Response<Post>) {
-                myList.addAll(response.body()?.hits?:ArrayList())
+            override fun onResponse(call: Call<List<Post>>, response: Response<List<Post>>) {
+                myList.addAll(response.body()?:ArrayList())
                 mainAdapter?.notifyDataSetChanged()
             }
 
-            override fun onFailure(call: Call<Post>, t: Throwable?) {
+            override fun onFailure(call: Call<List<Post>>, t: Throwable?) {
                 Log.e("ERROR", t?.message.toString())
             }
         })

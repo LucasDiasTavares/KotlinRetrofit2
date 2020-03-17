@@ -6,7 +6,7 @@ import retrofit2.http.GET
 
 interface JsonPlaceholderApi {
 
-    @GET("?key=$KEY")
-    fun getPosts(): Call<Post>
+    @GET("task-list")
+    fun getPosts(): Call<List<Post>>
 
 }

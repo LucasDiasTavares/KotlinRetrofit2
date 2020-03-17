@@ -12,7 +12,7 @@ import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.row_post.view.*
 
 class MainAdapter(private var context: Context,
-                  private var list: ArrayList<Hits>) : RecyclerView.Adapter<MainAdapter.MyViewHolder>() {
+                  private var list: ArrayList<Post>) : RecyclerView.Adapter<MainAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(root: ViewGroup, p1: Int): MyViewHolder{
         val view = LayoutInflater.from(context).inflate(R.layout.row_post, root, false)
@@ -24,7 +24,7 @@ class MainAdapter(private var context: Context,
     }
 
     override fun onBindViewHolder(viewHolder: MyViewHolder, position: Int) {
-        viewHolder.bind(list[position],context)
+        viewHolder.bind(list[position], context)
     }
 
     class MyViewHolder(itemViewHolder: View) : RecyclerView.ViewHolder(itemViewHolder), View.OnClickListener {
@@ -32,17 +32,17 @@ class MainAdapter(private var context: Context,
 
         }
 
-        fun bind(post: Hits, context: Context){
+        fun bind(post: Post, context: Context){
             val requestOptions = RequestOptions()
             requestOptions.placeholder(R.drawable.ic_launcher_foreground)
             requestOptions.error(R.drawable.ic_launcher_background)
 
             Glide.with(context)
-                    .load(post.previewURL)
+                    .load(post.image)
                     .apply(requestOptions)
                     .into(itemView.image_view)
 
-            itemView.txt_post.text = post.tags
+            itemView.txt_post.text = post.title
 
         }
         override fun onClick(view: View) {}
