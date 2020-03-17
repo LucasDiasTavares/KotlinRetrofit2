@@ -5,11 +5,14 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import br.com.lucasdiastavares.testandoretrofit.Model.Hits
 import br.com.lucasdiastavares.testandoretrofit.Model.Post
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.row_post.view.*
 
 class MainAdapter(private var context: Context,
-                  private var list: ArrayList<Post>) : RecyclerView.Adapter<MainAdapter.MyViewHolder>() {
+                  private var list: ArrayList<Hits>) : RecyclerView.Adapter<MainAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(root: ViewGroup, p1: Int): MyViewHolder{
         val view = LayoutInflater.from(context).inflate(R.layout.row_post, root, false)
@@ -21,17 +24,28 @@ class MainAdapter(private var context: Context,
     }
 
     override fun onBindViewHolder(viewHolder: MyViewHolder, position: Int) {
-        viewHolder.itemView.txt_post.text = list[position].title
+        viewHolder.bind(list[position],context)
     }
 
-    inner class MyViewHolder(itemViewHolder: View) : RecyclerView.ViewHolder(itemViewHolder), View.OnClickListener {
+    class MyViewHolder(itemViewHolder: View) : RecyclerView.ViewHolder(itemViewHolder), View.OnClickListener {
         init {
             itemViewHolder.btn_edit.setOnClickListener(this)
-            itemViewHolder.btn_delete.setOnClickListener(this)
         }
-        override fun onClick(view: View) {
-            //hackListener.onClickHack(itemView,view, adapterPosition)
+
+        fun bind(post: Hits, context: Context){
+            val requestOptions = RequestOptions()
+            requestOptions.placeholder(R.drawable.ic_launcher_foreground)
+            requestOptions.error(R.drawable.ic_launcher_background)
+
+            Glide.with(context)
+                    .load(post.previewURL)
+                    .apply(requestOptions)
+                    .into(itemView.image_view)
+
+            itemView.txt_post.text = post.previewURL
+
         }
+        override fun onClick(view: View) {}
     }
 
 
