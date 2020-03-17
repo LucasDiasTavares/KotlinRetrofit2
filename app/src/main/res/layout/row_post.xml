@@ -34,16 +34,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
-            <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btn_edit"
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorWhite"
-                app:layout_constraintTop_toTopOf="@id/image_view"
-                app:layout_constraintBottom_toBottomOf="@id/image_view"
-                app:layout_constraintStart_toEndOf="@id/txt_post"
-                app:layout_constraintEnd_toStartOf="@id/image_view" />
-
             <ImageView
                 android:id="@+id/image_view"
                 android:layout_width="80dp"
@@ -52,7 +42,7 @@
                 android:adjustViewBounds="true"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/btn_edit"
+                app:layout_constraintStart_toEndOf="@id/txt_post"
                 app:layout_constraintEnd_toEndOf="parent" />
 
         </android.support.constraint.ConstraintLayout>

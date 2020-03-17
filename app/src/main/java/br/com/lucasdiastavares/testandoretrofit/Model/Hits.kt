@@ -1,5 +1,6 @@
 package br.com.lucasdiastavares.testandoretrofit.Model
 
 data class Hits(
-        val previewURL: String
+        val previewURL: String,
+        val tags: String
 )

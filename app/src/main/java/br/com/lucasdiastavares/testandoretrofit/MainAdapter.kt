@@ -29,7 +29,7 @@ class MainAdapter(private var context: Context,
 
     class MyViewHolder(itemViewHolder: View) : RecyclerView.ViewHolder(itemViewHolder), View.OnClickListener {
         init {
-            itemViewHolder.btn_edit.setOnClickListener(this)
+
         }
 
         fun bind(post: Hits, context: Context){
@@ -42,7 +42,7 @@ class MainAdapter(private var context: Context,
                     .apply(requestOptions)
                     .into(itemView.image_view)
 
-            itemView.txt_post.text = post.previewURL
+            itemView.txt_post.text = post.tags
 
         }
         override fun onClick(view: View) {}
