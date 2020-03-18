@@ -23,25 +23,52 @@ class MainActivity : AppCompatActivity() {
     private var mainAdapter: MainAdapter?=null
     private var myList = ArrayList<Post>()
 
+    private val retrofit = Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("https://api-para-estudos-kotlin.herokuapp.com/api/")
+            .build()
+
+    private val jsonPlaceholderApi = retrofit.create(JsonPlaceholderApi::class.java)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         init()
-        retrofit2()
+        getPosts()
     }
 
-    private fun retrofit2() {
+    private fun init() {
+
+        toolbar.title = "CRUD Tavares"
+        swipeRefreshLayout.setOnRefreshListener {
+            getPosts()
+            swipeRefreshLayout.setRefreshing(false)
+        }
+
+        btn_main_adicionar.setOnClickListener{
+            createPost()
+            //showDialogAdd()
+        }
+
+        rc_view.layoutManager = LinearLayoutManager(
+                this, LinearLayout.VERTICAL, false)
+
+        mainAdapter = MainAdapter(this@MainActivity, myList)
+
+        rc_view.adapter = mainAdapter
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        getPosts()
+    }
+
+    //GET posts
+    private fun getPosts() {
         //Retrofit Builder
-        val retrofit = Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("https://api-para-estudos-kotlin.herokuapp.com/api/")
-                .build()
-
-        val jsonPlaceholderApi = retrofit.create(JsonPlaceholderApi::class.java)
-
         jsonPlaceholderApi.getPosts().enqueue(object: Callback<List<Post>>{
-
             override fun onResponse(call: Call<List<Post>>, response: Response<List<Post>>) {
                 myList.addAll(mainAdapter?.diffUtilList(
                         response.body() as ArrayList<Post>)?:ArrayList())
@@ -54,27 +81,28 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun init() {
+    //POST post
+    private fun createPost(){
 
-        toolbar.title = "CRUD Tavares"
-        swipeRefreshLayout.setOnRefreshListener {
-            retrofit2()
-            swipeRefreshLayout.setRefreshing(false)
-        }
+        val fakeNewPost = Post(
+                title = "Test fakeNewPost",
+                price = "10.99".toFloat(),
+                image = "https://cdn.pixabay.com/photo/2017/07/24/19/57/tiger-2535888__340.jpg",
+                description = "Any discription")
 
-        btn_main_adicionar.setOnClickListener{
-            showDialogAdd()
-        }
+        jsonPlaceholderApi.createPost(fakeNewPost).enqueue(object: Callback<Post>{
+            override fun onResponse(call: Call<Post>?, response: Response<Post>?) {
+                btn_main_adicionar.text = response?.code().toString()
+            }
 
-        rc_view.layoutManager = LinearLayoutManager(
-                this, LinearLayout.VERTICAL, false)
+            override fun onFailure(call: Call<Post>?, t: Throwable?) {
+                Log.e("ERROR", t?.message.toString())
+            }
+        })
 
-        mainAdapter = MainAdapter(this@MainActivity, myList)
-
-        rc_view.adapter = mainAdapter
     }
 
-
+    //Dialog create post
     fun showDialogAdd(
             context: Context = this) {
 
@@ -83,8 +111,6 @@ class MainActivity : AppCompatActivity() {
         val inflater = LayoutInflater.from(context)
         val dialogView = inflater.inflate(R.layout.add__dialog_main, null)
         alert_builder.setView(dialogView)
-
-        //dialogView.txt_title.text = "Adicionar"
 
         dialogView.dialog_save_button.setOnClickListener {
             val peso = dialogView.dialog_edit_title.text.toString()
@@ -106,7 +132,6 @@ class MainActivity : AppCompatActivity() {
         } catch (ex: Exception) {
             ex.printStackTrace()
         }
-
     }
 
 }
