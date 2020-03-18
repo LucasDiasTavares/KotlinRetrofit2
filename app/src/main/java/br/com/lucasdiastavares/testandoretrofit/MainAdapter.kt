@@ -1,6 +1,7 @@
 package br.com.lucasdiastavares.testandoretrofit
 
 import android.content.Context
+import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +26,37 @@ class MainAdapter(private var context: Context,
 
     override fun onBindViewHolder(viewHolder: MyViewHolder, position: Int) {
         viewHolder.bind(list[position], context)
+    }
+
+    fun diffUtilList(postList: ArrayList<Post>): ArrayList<Post>{
+        val oldList = list
+        val diffResult: DiffUtil.DiffResult = DiffUtil.calculateDiff(
+                ItemDiffCallback(oldList, postList)
+        )
+        list = postList
+        diffResult.dispatchUpdatesTo(this)
+        return  list
+    }
+
+    class ItemDiffCallback(var oldItemList: ArrayList<Post>,
+                           var newItemList: ArrayList<Post>):DiffUtil.Callback(){
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return (oldItemList[oldItemPosition].id == newItemList[newItemPosition].id )
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldItemList[oldItemPosition] == newItemList[newItemPosition]
+        }
+
+        override fun getOldListSize(): Int {
+            return  oldItemList.size
+        }
+
+        override fun getNewListSize(): Int {
+            return  newItemList.size
+        }
+
     }
 
     class MyViewHolder(itemViewHolder: View) : RecyclerView.ViewHolder(itemViewHolder), View.OnClickListener {
