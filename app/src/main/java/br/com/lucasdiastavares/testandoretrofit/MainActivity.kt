@@ -1,5 +1,6 @@
 package br.com.lucasdiastavares.testandoretrofit
 
+import android.content.ClipDescription
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -27,8 +28,7 @@ class MainActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl("https://api-para-estudos-kotlin.herokuapp.com/api/")
             .build()
-
-    private val jsonPlaceholderApi = retrofit.create(JsonPlaceholderApi::class.java)
+            .create(JsonPlaceholderApi::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,9 +46,8 @@ class MainActivity : AppCompatActivity() {
             swipeRefreshLayout.setRefreshing(false)
         }
 
-        btn_main_adicionar.setOnClickListener{
-            createPost()
-            //showDialogAdd()
+        btn_main_dialog.setOnClickListener{
+            showDialogAdd()
         }
 
         rc_view.layoutManager = LinearLayoutManager(
@@ -68,7 +67,7 @@ class MainActivity : AppCompatActivity() {
     //GET posts
     private fun getPosts() {
         //Retrofit Builder
-        jsonPlaceholderApi.getPosts().enqueue(object: Callback<List<Post>>{
+        retrofit.getPosts().enqueue(object: Callback<List<Post>>{
             override fun onResponse(call: Call<List<Post>>, response: Response<List<Post>>) {
                 myList.addAll(mainAdapter?.diffUtilList(
                         response.body() as ArrayList<Post>)?:ArrayList())
@@ -82,17 +81,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     //POST post
-    private fun createPost(){
+    private fun createPost(title: String, price: Float, image: String, description: String){
 
-        val fakeNewPost = Post(
-                title = "Test fakeNewPost",
-                price = "10.99".toFloat(),
-                image = "https://cdn.pixabay.com/photo/2017/07/24/19/57/tiger-2535888__340.jpg",
-                description = "Any discription")
-
-        jsonPlaceholderApi.createPost(fakeNewPost).enqueue(object: Callback<Post>{
+        retrofit.createPost(
+                Post(title = title, price = price, image = image, description = description))
+                .enqueue(object: Callback<Post>{
             override fun onResponse(call: Call<Post>?, response: Response<Post>?) {
-                btn_main_adicionar.text = response?.code().toString()
+                btn_main_dialog.text = response?.code().toString()
             }
 
             override fun onFailure(call: Call<Post>?, t: Throwable?) {
@@ -101,8 +96,6 @@ class MainActivity : AppCompatActivity() {
         })
 
     }
-
-    //Dialog create post
     fun showDialogAdd(
             context: Context = this) {
 
@@ -113,10 +106,10 @@ class MainActivity : AppCompatActivity() {
         alert_builder.setView(dialogView)
 
         dialogView.dialog_save_button.setOnClickListener {
-            val peso = dialogView.dialog_edit_title.text.toString()
-            val altura = dialogView.dialog_edit_img.text.toString()
-            //presenter?.salvar(peso, altura)
-            Toast.makeText(this, "Adicionado", Toast.LENGTH_SHORT).show()
+            createPost(title = dialogView.dialog_edit_title.text.toString(),
+                    price = dialogView.dialog_edit_price.text.toString().toFloat(),
+                    image = dialogView.dialog_edit_img.text.toString(),
+                    description = dialogView.dialog_edit_description.text.toString())
             dialog?.dismiss()
         }
 
