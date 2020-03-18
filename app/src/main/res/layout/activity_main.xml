@@ -5,27 +5,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="5dp"
-    android:paddingStart="5dp"
-    android:paddingEnd="5dp"
     tools:context=".MainActivity">
+
+    <include
+        android:id="@+id/ic_tb"
+        layout="@layout/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/swipeRefreshLayout"/>
 
     <com.baoyz.widget.PullRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/ic_tb"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rc_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:paddingEnd="5dp"
+            android:paddingStart="5dp"
+            android:paddingTop="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
         </android.support.v7.widget.RecyclerView>
 
     </com.baoyz.widget.PullRefreshLayout>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_main_adicionar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/ic_plus"
+        android:textStyle="bold"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp" />
 
 </android.support.constraint.ConstraintLayout>

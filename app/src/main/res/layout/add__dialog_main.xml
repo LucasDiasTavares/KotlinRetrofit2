@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center"
+    android:background="@drawable/shape_layout_grid_menu_home">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/txt_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="23sp"
+        android:text="Adicionar novo item"
+        android:textStyle="bold"
+        android:textColor="@color/colorHintGray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"/>
+
+    <android.support.v7.widget.AppCompatEditText
+        android:layout_marginTop="20dp"
+        android:id="@+id/dialog_edit_title"
+        android:layout_width="265dp"
+        android:layout_height="wrap_content"
+        android:inputType="textAutoComplete"
+        android:background="@drawable/shape_radius8dp_stroke_width280"
+        android:paddingStart="10dp"
+        android:paddingEnd="12dp"
+        android:hint="Titulo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_title"
+        app:layout_constraintBottom_toTopOf="@+id/dialog_edit_price"/>
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/dialog_edit_price"
+        android:layout_width="265dp"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:background="@drawable/shape_radius8dp_stroke_width280"
+        android:paddingStart="10dp"
+        android:paddingEnd="12dp"
+        android:hint="Preço"
+        android:drawableEnd="@drawable/ic_plus"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_edit_title"
+        app:layout_constraintBottom_toTopOf="@+id/dialog_edit_img"/>
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/dialog_edit_img"
+        android:layout_width="265dp"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:background="@drawable/shape_radius8dp_stroke_width280"
+        android:paddingStart="10dp"
+        android:paddingEnd="12dp"
+        android:hint="Imagem URL"
+        android:drawableEnd="@drawable/ic_plus"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dialog_edit_price"
+        app:layout_constraintBottom_toTopOf="@+id/dialog_edit_description"/>
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/dialog_edit_description"
+        android:layout_width="265dp"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:paddingStart="10dp"
+        android:lines="4"
+        android:maxLines="4"
+        android:hint="descrição"
+        android:background="@drawable/shape_radius8dp_stroke_width280"
+        android:paddingEnd="12dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dialog_edit_img"
+        app:layout_constraintBottom_toTopOf="@+id/dialog_save_button"/>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/dialog_save_button"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="salvar"
+        android:textStyle="bold"
+        android:background="@color/colorPrimary"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/dialog_cancel_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_edit_description"/>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/dialog_cancel_button"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="cancelar"
+        android:textStyle="bold"
+        android:background="@color/colorGray"
+        app:layout_constraintStart_toEndOf="@id/dialog_save_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/dialog_save_button"
+        app:layout_constraintTop_toTopOf="@id/dialog_save_button" />
+
+</android.support.constraint.ConstraintLayout>

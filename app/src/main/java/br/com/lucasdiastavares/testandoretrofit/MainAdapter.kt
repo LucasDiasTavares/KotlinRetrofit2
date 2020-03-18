@@ -75,6 +75,7 @@ class MainAdapter(private var context: Context,
                     .into(itemView.image_view)
 
             itemView.txt_post.text = post.title
+            itemView.txt_price.text = post.price?.toString()
 
         }
         override fun onClick(view: View) {}

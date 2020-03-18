@@ -26,13 +26,24 @@
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/txt_post"
                 android:layout_width="220dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginRight="5dp"
                 android:textColor="@color/colorBlack"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/txt_price"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <ImageView
                 android:id="@+id/image_view"
