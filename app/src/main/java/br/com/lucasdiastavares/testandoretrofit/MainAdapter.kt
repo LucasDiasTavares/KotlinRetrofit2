@@ -8,12 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import br.com.lucasdiastavares.testandoretrofit.Model.Hits
 import br.com.lucasdiastavares.testandoretrofit.Model.Post
+import br.com.lucasdiastavares.testandoretrofit.Utils.HackListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.row_post.view.*
 
 class MainAdapter(private var context: Context,
-                  private var list: ArrayList<Post>) : RecyclerView.Adapter<MainAdapter.MyViewHolder>() {
+                  private var list: ArrayList<Post>,
+                  private var hackListener: HackListener) : RecyclerView.Adapter<MainAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(root: ViewGroup, p1: Int): MyViewHolder{
         val view = LayoutInflater.from(context).inflate(R.layout.row_post, root, false)
@@ -59,9 +61,13 @@ class MainAdapter(private var context: Context,
 
     }
 
-    class MyViewHolder(itemViewHolder: View) : RecyclerView.ViewHolder(itemViewHolder), View.OnClickListener {
+    inner class MyViewHolder(itemViewHolder: View) : RecyclerView.ViewHolder(itemViewHolder), View.OnClickListener {
         init {
+            itemViewHolder.btn_main_delete.setOnClickListener(this)
+        }
 
+        override fun onClick(view: View) {
+            hackListener.onClickHack(view, adapterPosition)
         }
 
         fun bind(post: Post, context: Context){
@@ -78,7 +84,6 @@ class MainAdapter(private var context: Context,
             itemView.txt_price.text = post.price?.toString()
 
         }
-        override fun onClick(view: View) {}
     }
 
 
