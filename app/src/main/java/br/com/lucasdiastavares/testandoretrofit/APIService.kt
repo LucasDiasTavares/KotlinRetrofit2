@@ -12,14 +12,14 @@ interface APIService {
     @POST("task-create/")
     fun createPost(@Body newPost: Post): Call<Post>
 
-    @PUT("posts/{id}/")
-    fun updatePost(@Path("id") id: Long ,
+    @PATCH("task-update/{id}/")
+    fun updatePost(@Path("id") id: Int ,
                    @Field("title") title: String ,
                    @Field("price") price: Float,
                    @Field("image") image: String,
                    @Field("description") description: String)
 
     @DELETE("task-delete/{id}/")
-    fun deletePost(@Path("id") id: Long): Call<Void>
+    fun deletePost(@Path("id") id: Int): Call<Void>
 
 }

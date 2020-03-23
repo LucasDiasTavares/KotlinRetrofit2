@@ -1,6 +1,7 @@
 package br.com.lucasdiastavares.testandoretrofit
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
@@ -61,8 +62,7 @@ class MainActivity : AppCompatActivity(), HackListener {
     override fun onClickHack(view: View, position: Int) {
         when(view.id){
             R.id.btn_main_delete -> {
-                //deletePost((myList[position].id)!!.toLong(), position)
-                deletePost((myList[position].id)!!.toLong(), position)
+                deletePost((myList[position].id)!!)
                 Toast.makeText(this, "Deletado", Toast.LENGTH_SHORT).show()
             }
         }
@@ -70,7 +70,6 @@ class MainActivity : AppCompatActivity(), HackListener {
 
     override fun onResume() {
         super.onResume()
-
         getPosts()
     }
 
@@ -91,12 +90,11 @@ class MainActivity : AppCompatActivity(), HackListener {
 
     //POST post
     private fun createPost(title: String, price: Float, image: String, description: String){
-
         retrofit.createPost(
                 Post(title = title, price = price, image = image, description = description))
                 .enqueue(object: Callback<Post>{
             override fun onResponse(call: Call<Post>?, response: Response<Post>?) {
-                mainAdapter?.diffUtilList(myList)
+                getPosts()
                 Toast.makeText(this@MainActivity, "Adicionado", Toast.LENGTH_SHORT).show()
             }
 
@@ -108,11 +106,11 @@ class MainActivity : AppCompatActivity(), HackListener {
     }
 
     //DELETE post
-    private fun deletePost(id: Long, position: Int){
+    private fun deletePost(id: Int){
         retrofit.deletePost(id).enqueue(object: Callback<Void>{
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                btn_main_dialog.text = response.code().toString()
-                mainAdapter?.notifyItemRemoved(position)
+                getPosts()
+                Toast.makeText(this@MainActivity, "Deletado", Toast.LENGTH_SHORT).show()
             }
 
             override fun onFailure(call: Call<Void>?, t: Throwable?) {
@@ -126,10 +124,10 @@ class MainActivity : AppCompatActivity(), HackListener {
             context: Context = this) {
 
         var dialog: AlertDialog? = null
-        val alert_builder = AlertDialog.Builder(context, R.style.CustomDialogTransParent)
+        val alertBuilder = AlertDialog.Builder(context, R.style.CustomDialogTransParent)
         val inflater = LayoutInflater.from(context)
         val dialogView = inflater.inflate(R.layout.add__dialog_main, null)
-        alert_builder.setView(dialogView)
+        alertBuilder.setView(dialogView)
 
         dialogView.dialog_save_button.setOnClickListener {
             createPost(title = dialogView.dialog_edit_title.text.toString(),
@@ -143,7 +141,7 @@ class MainActivity : AppCompatActivity(), HackListener {
             dialog?.dismiss()
         }
 
-        dialog = alert_builder.create()
+        dialog = alertBuilder.create()
         dialog?.setCancelable(false)
         dialog?.setCanceledOnTouchOutside(false)
         try {
